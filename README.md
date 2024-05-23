@@ -3,3 +3,5 @@ Using NEAT-python genetic algorithm to develop the ideal bird that clears the Fl
 Includes two versions:
   - User playable version
   - Simulation where NEAT attempts to clear the game
+
+Feel free to play a game of flappy bird or watch AI beat the game
