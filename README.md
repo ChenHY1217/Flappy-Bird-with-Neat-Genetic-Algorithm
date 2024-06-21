@@ -5,3 +5,11 @@ Includes two versions:
   - Simulation where NEAT attempts to clear the game
 
 Feel free to play a game of flappy bird or watch AI beat the game
+
+# Instructions to Run Simulation
+Requirements:
+- Install python3
+- Install Pygame using "pip install pygame"
+- Install NEAT-python using "pip install neat-python"
+
+Copy desired version of code and run python file. Have fun.
