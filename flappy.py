@@ -14,6 +14,7 @@ pygame.mixer.init()
 pygame.display.set_caption("Flappy Bird")
 
 # Global Variables
+ATTEMPTS = 0
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
 
@@ -25,6 +26,7 @@ BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bg.png
 STAT_FONT = pygame.font.SysFont("comicsans", 50)
 STAT_FONT2 = pygame.font.SysFont("comicsans", 40)
 STAT_FONT3 = pygame.font.SysFont("comicsans", 30)
+STAT_FONT4 = pygame.font.SysFont("comicsans", 15)
 
 class Bird:
     IMGS = BIRD_IMGS 
@@ -162,6 +164,10 @@ class Base:
         win.blit(self.IMG, (self.x1, self.y))
         win.blit(self.IMG, (self.x2, self.y))
 
+def incrementAttempts():
+    global ATTEMPTS
+    ATTEMPTS = ATTEMPTS + 1
+
 def draw_start_window(win, bird, base, score, high_score):
     win.blit(BG_IMG, (0,0))
     
@@ -170,6 +176,8 @@ def draw_start_window(win, bird, base, score, high_score):
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
     text2 = STAT_FONT3.render("High Score: " + str(high_score), 1, (255,255,255))
     win.blit(text2, (WIN_WIDTH - 10 - text2.get_width(), 70))
+    text3 = STAT_FONT4.render("Attempts: " + str(ATTEMPTS), 1, (255,255,255))
+    win.blit(text3, (WIN_WIDTH - 10 - text3.get_width(), 110))
 
     start_text = STAT_FONT3.render("Welcome to Flappy Bird", 1, (255,255,255))
     win.blit(start_text, (100, 250))
@@ -192,6 +200,8 @@ def draw_window(win, bird, pipes, base, score, high_score):
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
     text2 = STAT_FONT3.render("High Score: " + str(high_score), 1, (255,255,255))
     win.blit(text2, (WIN_WIDTH - 10 - text2.get_width(), 70))
+    text3 = STAT_FONT4.render("Attempts: " + str(ATTEMPTS), 1, (255,255,255))
+    win.blit(text3, (WIN_WIDTH - 10 - text3.get_width(), 110))
 
     base.draw(win)
     bird.draw(win)
@@ -208,6 +218,8 @@ def draw_game_over(win, bird, pipes, base, score, high_score):
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
     text2 = STAT_FONT3.render("High Score: " + str(high_score), 1, (255,255,255))
     win.blit(text2, (WIN_WIDTH - 10 - text2.get_width(), 70))
+    text3 = STAT_FONT4.render("Attempts: " + str(ATTEMPTS), 1, (255,255,255))
+    win.blit(text3, (WIN_WIDTH - 10 - text3.get_width(), 110))
 
     # drawing gameover text
     end_text = STAT_FONT.render("GAME OVER", 1, (255,255,255))
@@ -291,6 +303,7 @@ def main(high_score):
             pipe.move()
 
         if collided:
+            incrementAttempts()
             break
 
         if add_pipe:
